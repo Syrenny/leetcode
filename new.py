@@ -85,7 +85,7 @@ def create_files(url: str, pattern: str) -> tuple[Path, Path]:
     if test_path.exists():
         raise FileExistsError(test_path)
 
-    import_path = f"solutions.{pattern}.{slug}"
+    import_path = f"src.solutions.{pattern}.{slug}"
 
     sol_path.write_text(solution_template(url, slug), encoding="utf-8")
     test_path.write_text(test_template(import_path), encoding="utf-8")
