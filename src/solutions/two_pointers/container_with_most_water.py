@@ -10,19 +10,21 @@ class Solution:
 
     def maxArea(self, height: List[int]) -> int:
         left, right = 0, len(height) - 1
-        result = 0
+        best = 0
 
         while left < right:
-            volume = min(height[left], height[right]) * (right - left)
+            h_left = height[left]
+            h_right = height[right]
+            width = right - left
+            best = max(best, min(h_left, h_right) * width)
 
-            result = max(result, volume)
-
-            if height[left] < height[right]:
+            if h_left <= h_right:
                 left += 1
-            elif height[left] > height[right]:
-                right -= 1
+                while left < right and height[left] <= h_left:
+                    left += 1
             else:
-                left += 1
                 right -= 1
+                while left < right and height[right] <= h_right:
+                    right -= 1
 
-        return result
+        return best
