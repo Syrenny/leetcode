@@ -49,7 +49,7 @@ class Solution:
 def test_template(import_path: str) -> str:
     """Pytest skeleton with NaiveSolution."""
     return f'''from {import_path} import Solution
-
+import pytest
 
 class NaiveSolution:
     """Baseline brute-force reference."""
@@ -62,6 +62,16 @@ def test_smoke() -> None:
     _ = Solution()
     _ = NaiveSolution()
     assert True
+    
+@pytest.mark.parametrize(
+    ("x", "expected"),
+    [
+        (123, 321),
+    ],
+)
+def test_simple(x: int, expected: int) -> None:
+    solution = Solution()
+    assert solution.reverse(x) == expected
 '''
 
 
