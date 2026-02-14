@@ -79,6 +79,8 @@ def test_simple(x: int, expected: int) -> None:
 
 
 def create_files(url: str, pattern: str) -> tuple[Path, Path]:
+    pattern = kebab_to_snake(pattern)
+
     raw_slug = extract_slug(url)
     slug = kebab_to_snake(raw_slug)
 
