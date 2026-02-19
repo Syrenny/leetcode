@@ -33,6 +33,8 @@ def kebab_to_snake(value: str) -> str:
 def solution_template(url: str, slug: str) -> str:
     """Python solution skeleton."""
     return f'''
+from __future__ import annotations
+
 
 class Solution:
     """LeetCode problem
