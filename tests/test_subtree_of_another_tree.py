@@ -1,70 +1,11 @@
 from __future__ import annotations
 
-from collections import deque
-from typing import Iterable, Optional
+from typing import Optional
 
 import pytest
 
+from common.tree import build_tree
 from src.solutions.tree.subtree_of_another_tree import Solution, TreeNode
-
-
-def build_tree(values: Iterable[Optional[int]]) -> Optional[TreeNode]:
-    it = iter(values)
-    try:
-        root_val = next(it)
-    except StopIteration:
-        return None
-
-    if root_val is None:
-        return None
-
-    root = TreeNode(root_val)
-    queue: deque[TreeNode] = deque([root])
-
-    while queue:
-        node = queue.popleft()
-
-        try:
-            left_val = next(it)
-        except StopIteration:
-            break
-        if left_val is not None:
-            node.left = TreeNode(left_val)
-            queue.append(node.left)
-
-        try:
-            right_val = next(it)
-        except StopIteration:
-            break
-        if right_val is not None:
-            node.right = TreeNode(right_val)
-            queue.append(node.right)
-
-    return root
-
-
-def tree_to_level_order(root: Optional[TreeNode]) -> list[Optional[int]]:
-    """Serialize a binary tree into level-order list (trim trailing None's)."""
-    if root is None:
-        return []
-
-    out: list[Optional[int]] = []
-    queue: deque[Optional[TreeNode]] = deque([root])
-
-    while queue:
-        node = queue.popleft()
-        if node is None:
-            out.append(None)
-            continue
-
-        out.append(node.val)
-        queue.append(node.left)
-        queue.append(node.right)
-
-    while out and out[-1] is None:
-        out.pop()
-
-    return out
 
 
 class NaiveSolution:
